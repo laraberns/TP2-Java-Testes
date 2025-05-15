@@ -6,43 +6,61 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculadoraReembolsoTest {
-    private CalculadoraReembolso calculadoraReembolso;
+
+    private CalculadoraReembolso calculadora;
+    // Exercicio 4
     private Paciente pacienteDummy;
 
     @BeforeEach
     void setUp() {
-        calculadoraReembolso = new CalculadoraReembolso();
+        calculadora = new CalculadoraReembolso();
+        pacienteDummy = new Paciente();  // objeto fictício
     }
 
-    // Exercício 1
+    // Exercicio 1
     @Test
-    void deveCalcularValorReembolsado() {
-        double valorReembolsado = calculadoraReembolso.calcularValorReembolsado(200, 70, pacienteDummy);
-        assertEquals(140, valorReembolsado);
+    void deveRetornarReembolsoCorreto() {
+        double resultado = calculadora.calcular(200, 70, pacienteDummy);
+        assertEquals(140.0, resultado, 0.0001);
     }
 
-    // Exercício 2
+    // Exercicio 2
     @Test
-    void deveRetornarValorTotalQuandoPercentualFor100() {
-        double valorReembolsado = calculadoraReembolso.calcularValorReembolsado(200, 100, pacienteDummy);
-        assertEquals(200, valorReembolsado);
+    void deveRetornarZeroQuandoValorConsultaForZero() {
+        double resultado = calculadora.calcular(0, 70, pacienteDummy);
+        assertEquals(0.0, resultado, 0.0001);
     }
 
     @Test
     void deveRetornarZeroQuandoPercentualForZero() {
-        double valorReembolsado = calculadoraReembolso.calcularValorReembolsado(200, 0, pacienteDummy);
-        assertEquals(0, valorReembolsado);
+        double resultado = calculadora.calcular(200, 0, pacienteDummy);
+        assertEquals(0.0, resultado, 0.0001);
     }
 
     @Test
-    void deveRetornarZeroQuandoValorConsultaForZero() {
-        double valorReembolsado = calculadoraReembolso.calcularValorReembolsado(0, 100, pacienteDummy);
-        assertEquals(0, valorReembolsado);
+    void deveRetornarValorTotalQuandoPercentualFor100() {
+        double resultado = calculadora.calcular(150, 100, pacienteDummy);
+        assertEquals(150.0, resultado, 0.0001);
     }
 
     @Test
-    void deveRetornar100QuandoValorEPercentualForem100() {
-        double valorReembolsado = calculadoraReembolso.calcularValorReembolsado(100, 100, pacienteDummy);
-        assertEquals(100, valorReembolsado);
+    void deveLancarExcecaoQuandoValorConsultaForNegativo() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculadora.calcular(-100, 50, pacienteDummy);
+        });
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoPercentualForNegativo() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculadora.calcular(100, -10, pacienteDummy);
+        });
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoPercentualForMaiorQue100() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculadora.calcular(100, 150, pacienteDummy);
+        });
     }
 }

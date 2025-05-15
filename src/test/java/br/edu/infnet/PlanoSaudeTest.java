@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Exercicio 6
 class PlanoSaudeTest {
     static class PlanoSaudeStub implements PlanoSaude {
         @Override
