@@ -6,15 +6,15 @@ import java.util.List;
 // Exercicio 5
 public class HistoricoConsultasFake implements HistoricoConsultas {
 
-    private List<Double> consultas = new ArrayList<>();
+    private List<Consulta> consultas = new ArrayList<>();
 
     @Override
-    public void registrarConsulta(double valorConsulta) {
-        consultas.add(valorConsulta);
+    public void registrarConsulta(Consulta consulta) {
+        consultas.add(consulta);
     }
 
     @Override
-    public List<Double> listarConsultas() {
+    public List<Consulta> listarConsultas() {
         return consultas;
     }
 }
