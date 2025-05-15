@@ -71,4 +71,12 @@ class CalculadoraReembolsoTest {
             calculadora.calcular(100, 150, pacienteDummy);
         });
     }
+
+    // Exercicio 11
+    @Test
+    void deveRetornarReembolsoMaximoQuandoValorConsultaForMaiorQue150() {
+        double resultado = calculadora.calcular(200, 90, pacienteDummy);
+
+        comparaValores.comparaValoresMargemErro(resultado, 150.0);
+    }
 }

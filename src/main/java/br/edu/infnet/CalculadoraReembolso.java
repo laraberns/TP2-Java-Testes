@@ -7,6 +7,8 @@ public class CalculadoraReembolso {
         if (valorConsulta < 0 || percentualCobertura < 0 || percentualCobertura > 100) {
             throw new IllegalArgumentException("Valores inválidos");
         }
-        return valorConsulta * (percentualCobertura / 100);
+
+        // Exercicio 11
+        return Math.min(valorConsulta * percentualCobertura / 100, 150);
     }
 }
