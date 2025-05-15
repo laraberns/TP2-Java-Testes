@@ -10,37 +10,45 @@ class CalculadoraReembolsoTest {
     private CalculadoraReembolso calculadora;
     // Exercicio 4
     private Paciente pacienteDummy;
+    private ComparaValores comparaValores;
 
     @BeforeEach
     void setUp() {
         calculadora = new CalculadoraReembolso();
         pacienteDummy = new Paciente();  // objeto fictício
+        comparaValores = new ComparaValores();
     }
 
-    // Exercicio 1
+    // Exercicio 1 e 10
     @Test
     void deveRetornarReembolsoCorreto() {
         double resultado = calculadora.calcular(200, 70, pacienteDummy);
-        assertEquals(140.0, resultado, 0.0001);
+
+        comparaValores.comparaValoresMargemErro(resultado, 140.0);
     }
 
-    // Exercicio 2
+    // Exercicio 2 e 10
     @Test
     void deveRetornarZeroQuandoValorConsultaForZero() {
         double resultado = calculadora.calcular(0, 70, pacienteDummy);
-        assertEquals(0.0, resultado, 0.0001);
+
+        comparaValores.comparaValoresMargemErro(resultado, 0.0);
     }
 
+    // Exercicio 2 e 10
     @Test
     void deveRetornarZeroQuandoPercentualForZero() {
         double resultado = calculadora.calcular(200, 0, pacienteDummy);
-        assertEquals(0.0, resultado, 0.0001);
+
+        comparaValores.comparaValoresMargemErro(resultado, 0.0);
     }
 
+    // Exercicio 2 e 10
     @Test
     void deveRetornarValorTotalQuandoPercentualFor100() {
         double resultado = calculadora.calcular(150, 100, pacienteDummy);
-        assertEquals(150.0, resultado, 0.0001);
+
+        comparaValores.comparaValoresMargemErro(resultado, 150.0);
     }
 
     @Test
